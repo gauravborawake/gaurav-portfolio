@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    
+    <!-- Letter Gradient -->
+    <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="50%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+
+    <!-- Border Glow Gradient -->
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.8" />
+    </linearGradient>
+    
+    <!-- Soft Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer squircle background with glow border -->
+  <rect x="24" y="24" width="464" height="464" rx="128" fill="url(#bgGrad)" stroke="url(#glowGrad)" stroke-width="6" />
+
+  <!-- Futuristic "G" Path -->
+  <path d="M370,165 
+           C325,115 220,115 170,165 
+           C120,215 120,305 170,355 
+           C220,405 325,405 370,355 
+           C395,330 405,295 405,265
+           L270,265
+           L270,215
+           L455,215
+           L455,275
+           C455,320 435,375 400,410
+           C330,480 195,480 125,410
+           C55,340 55,205 125,135
+           C195,65 330,65 400,135
+           Z" 
+        fill="url(#gGrad)" />
+
+  <!-- Connectivity/IoT smart dot -->
+  <circle cx="400" cy="140" r="22" fill="#10b981" filter="url(#glow)" />
+</svg>
