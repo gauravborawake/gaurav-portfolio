@@ -23,34 +23,38 @@ export default function Header() {
   useEffect(() => {
     setMounted(true);
 
-    // Scroll detection
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
 
-    // Intersection Observer for active section scroll spy
-    const sectionIds = navLinks.map((l) => l.id);
-    const observers: IntersectionObserver[] = [];
+      const sectionToNavLink: Record<string, string> = {
+        home: "home",
+        about: "about",
+        resume: "about",
+        portfolio: "portfolio",
+        contact: "contact"
+      };
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
+      const scrollPosition = window.scrollY + 250; // offset of 250px from top
+      
+      let current = "home";
+      for (const sectionId of ["home", "about", "resume", "portfolio", "contact"]) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            current = sectionToNavLink[sectionId] || current;
           }
-        },
-        { threshold: 0.4, rootMargin: "-80px 0px -40% 0px" }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Call once initially to set the correct state on load
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      observers.forEach((obs) => obs.disconnect());
     };
   }, []);
 
